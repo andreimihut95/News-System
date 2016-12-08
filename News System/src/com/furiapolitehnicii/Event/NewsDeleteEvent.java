@@ -10,7 +10,7 @@ public class NewsDeleteEvent extends Event{
 
 	@Override
 	public String getIntro() {
-		return "Non senzational! S-a sters stirea!";
+		return "This news was removed from the editorial!";
 	}
 
 }

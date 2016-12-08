@@ -1,34 +1,32 @@
 package com.furiapolitehnicii.Listener;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Queue;
 
-import com.furiapolitehnicii.Dispatcher.Dispatcher;
 import com.furiapolitehnicii.Event.Event;
+import com.furiapolitehnicii.Event.NewsAppearEvent;
+import com.furiapolitehnicii.News.News;
 
-public class Reader implements Listener{
+public class Reader implements Listener {
 	private String name;
-	private Set<Dispatcher> newsDispatcher = new HashSet<Dispatcher>();
-	
-	public Reader(String name) {
+	private Queue<Event> events;
+
+	public Reader(String name , Queue<Event> events) {
 		this.name = name;
+		this.events = events;
 	}
-	public String getName()
-	{
+
+	public String getName() {
 		return this.name;
 	}
-	public void attachDispatcher(Dispatcher dispatcher)
+	public void onNewsReadEvent(News news)
 	{
-		newsDispatcher.add(dispatcher);
+		news.incrementNumberOfViews();
+		Event newsEvent = new NewsAppearEvent(news);
+		events.add(newsEvent);
 	}
-	public void dettachDispatcher(Dispatcher dispatcher)
-	{
-		newsDispatcher.remove(dispatcher);
-	}
-
 	@Override
 	public void dispatch(Event event) {
-		System.out.println("Hello " + name+", "+ event.getIntro() + System.lineSeparator() + event.getNews());
+		System.out.println("Hello " + name + ", " + event.getIntro() + System.lineSeparator() + event.getNews());
 	}
 
 }

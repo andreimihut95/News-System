@@ -10,7 +10,7 @@ public class NewsAppearEvent extends Event {
 
 	@Override
 	public String getIntro() {
-		return "Senzational! A aparut o noua stire!";
+		return "A new news appeared!";
 	}
 
 }

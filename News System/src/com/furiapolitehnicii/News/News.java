@@ -14,9 +14,11 @@ public class News {
 	private String informationSource;
 	private Date firstPublication;
 	private Date lastModification;
-	private int noOfNewsRead;
+	private int numberOfViews;
 	private boolean deleted;
-	public News(String title, String author, String domain, List<String> subdomains, String informationSource , String content) {
+
+	public News(String title, String author, String domain, List<String> subdomains, String informationSource,
+			String content) {
 		this.title = title;
 		this.author = author;
 		this.domain = domain;
@@ -26,25 +28,45 @@ public class News {
 		this.lastModification = new Date();
 		this.content = content;
 		this.deleted = false;
-		this.noOfNewsRead = 0;
+		this.numberOfViews = 0;
 	}
-	
-	public boolean isDeleted()
-	{
+
+	public String toString() {
+		StringBuffer toString = new StringBuffer();
+		toString.append("Title: " + title);
+		toString.append(System.lineSeparator());
+		toString.append("Author: " + author);
+		toString.append(System.lineSeparator());
+		toString.append("Domain: " + domain);
+		toString.append(System.lineSeparator());
+		toString.append("Subdomains: " + subdomains);
+		toString.append(System.lineSeparator());
+		toString.append("Information source: " + informationSource);
+		toString.append(System.lineSeparator());
+		toString.append(("First publication: " + firstPublication));
+		toString.append(System.lineSeparator());
+		toString.append("Last modification" + lastModification);
+		toString.append(System.lineSeparator());
+		toString.append("Content: " + content);
+		return toString.toString();
+	}
+
+	public boolean isDeleted() {
 		return this.deleted;
 	}
-	public void delete()
-	{
+
+	public void delete() {
 		this.deleted = true;
 	}
-	public void incrementNoOfNewsRead()
-	{
-		++noOfNewsRead;
+
+	public void incrementNumberOfViews() {
+		numberOfViews++;
 	}
-	public int getNoOfNewsRead()
-	{
-		return this.noOfNewsRead;
+
+	public int getNumberOfViews() {
+		return numberOfViews;
 	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -106,4 +128,5 @@ public class News {
 		this.content = content;
 		lastModification = new Date();
 	}
+
 }

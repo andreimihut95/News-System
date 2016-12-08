@@ -11,9 +11,9 @@ public class NewsDispatcher implements Dispatcher {
 	private class Subscription {
 		private Listener listener;
 		private Filter filter;
-		private String typeEvent ;
+		private Class<?> typeEvent ;
 
-		public Subscription(Listener listener, Filter filter, String typeEvent) {
+		public Subscription(Listener listener, Filter filter, Class<?> typeEvent) {
 			this.listener = listener;
 			this.filter = filter;
 			this.typeEvent = typeEvent;
@@ -27,7 +27,7 @@ public class NewsDispatcher implements Dispatcher {
 			return filter;
 		}
 
-		public String getEvent() {
+		public Class<?> getEvent() {
 			return typeEvent;
 		}
 
@@ -80,25 +80,23 @@ public class NewsDispatcher implements Dispatcher {
 	private final Set<Subscription> subscriptions = new HashSet<Subscription>();
 
 	@Override
-	public void subscribeListener(String typeEvent, Filter filter, Listener listener) {
-		subscriptions.add(new Subscription(listener, filter, typeEvent));
-		listener.attachDispatcher(this);
+	public void subscribeListener(Class<?> eventType, Filter filter, Listener listener) {
+		subscriptions.add(new Subscription(listener, filter, eventType));
 	}
 
 	@Override
-	public void unsubscribeListener(String typeEvent, Filter filter, Listener listener) {
-		subscriptions.remove(new Subscription(listener, filter, typeEvent));
-		listener.dettachDispatcher(this);
+	public void unsubscribeListener(Class<?> eventType, Filter filter, Listener listener) {
+		subscriptions.remove(new Subscription(listener, filter, eventType));
 	}
 
 	@Override
 	public void publish(Event event) {
 		for (Subscription subscription : subscriptions) {
-			String thisEvent = subscription.getEvent();
+			String thisEventType = subscription.getEvent().getName();
 			Listener thisListener = subscription.getListener();
 			Filter thisFilter = subscription.getFilter();
 			
-			if(thisEvent.equals(event) && (thisFilter == null || thisFilter.verify(event)))
+			if(thisEventType.equals(event.getType()) && (thisFilter == null || thisFilter.verify(event)))
 			{
 				thisListener.dispatch(event);
 			}

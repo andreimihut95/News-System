@@ -47,6 +47,16 @@ public class NewsFilter extends Filter {
 		return false;
 	}
 
+	private boolean isInSubdomains(List<String> subdomains) {
+		if (this.subdomains == null)
+			return true;
+		for (String subdomain : subdomains) {
+			if (!this.subdomains.contains(subdomain))
+				return false;
+		}
+		return true;
+	}
+
 	@Override
 	public boolean verify(Event event) {
 		String author = event.getNews().getAuthor();
@@ -54,11 +64,12 @@ public class NewsFilter extends Filter {
 		String informationSource = event.getNews().getInformationSource();
 		Date firstPublication = event.getNews().getFirstPublication();
 		Date lastModification = event.getNews().getLastModification();
+		List<String> subdomains = event.getNews().getSubdomains();
 
 		return hasSameType(this.author, author) && hasSameType(this.domain, domain)
 				&& hasSameType(this.firstPublication.toString(), firstPublication.toString())
 				&& hasSameType(this.lastModification.toString(), lastModification.toString())
-				&& hasSameType(this.informationSource, informationSource);
+				&& hasSameType(this.informationSource, informationSource) && isInSubdomains(subdomains);
 	}
 
 }
