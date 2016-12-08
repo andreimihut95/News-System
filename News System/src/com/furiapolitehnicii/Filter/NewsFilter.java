@@ -39,10 +39,10 @@ public class NewsFilter extends Filter {
 		this.lastModification = lastModification;
 	}
 
-	private static boolean hasSameType(String type1, String type2) {
+	private static boolean hasSameType(Object type1, Object type2) {
 		if (type1 == null)
 			return true;
-		else if (type1.equals(type2))
+		else if (type1.toString().equals(type2.toString()))
 			return true;
 		return false;
 	}
@@ -67,8 +67,8 @@ public class NewsFilter extends Filter {
 		List<String> subdomains = event.getNews().getSubdomains();
 
 		return hasSameType(this.author, author) && hasSameType(this.domain, domain)
-				&& hasSameType(this.firstPublication.toString(), firstPublication.toString())
-				&& hasSameType(this.lastModification.toString(), lastModification.toString())
+				&& hasSameType(this.firstPublication, firstPublication)
+				&& hasSameType(this.lastModification, lastModification)
 				&& hasSameType(this.informationSource, informationSource) && isInSubdomains(subdomains);
 	}
 

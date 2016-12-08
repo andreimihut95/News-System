@@ -10,7 +10,7 @@ public class NewsDeleteEvent extends Event{
 
 	@Override
 	public String getIntro() {
-		return "This news was removed from the editorial!";
+		return "this news was removed from the editorial!";
 	}
 
 }

@@ -1,6 +1,5 @@
 package com.furiapolitehnicii.News;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +9,7 @@ public class News {
 	private String author;
 	private String domain;
 	private String content;
-	private List<String> subdomains = new ArrayList<String>();
+	private List<String> subdomains;
 	private String informationSource;
 	private Date firstPublication;
 	private Date lastModification;
@@ -45,9 +44,10 @@ public class News {
 		toString.append(System.lineSeparator());
 		toString.append(("First publication: " + firstPublication));
 		toString.append(System.lineSeparator());
-		toString.append("Last modification" + lastModification);
+		toString.append("Last modification: " + lastModification);
 		toString.append(System.lineSeparator());
 		toString.append("Content: " + content);
+		toString.append(System.lineSeparator());
 		return toString.toString();
 	}
 

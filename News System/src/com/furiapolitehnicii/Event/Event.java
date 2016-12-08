@@ -5,7 +5,7 @@ import com.furiapolitehnicii.News.News;
 public abstract class Event {
 
 	private News news;
-	private final String type = this.getClass().getName();
+	private final String type = this.getClass().getSimpleName();
 	abstract public String getIntro();
 	
 	public String getType()

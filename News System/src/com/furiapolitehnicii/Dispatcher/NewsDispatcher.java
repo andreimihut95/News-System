@@ -18,6 +18,13 @@ public class NewsDispatcher implements Dispatcher {
 			this.filter = filter;
 			this.typeEvent = typeEvent;
 		}
+		
+		
+		@Override
+		public String toString() {
+			return "Subscription [listener=" + listener + ", filter=" + filter + ", typeEvent=" + typeEvent + "]";
+		}
+
 
 		public Listener getListener() {
 			return listener;
@@ -92,7 +99,7 @@ public class NewsDispatcher implements Dispatcher {
 	@Override
 	public void publish(Event event) {
 		for (Subscription subscription : subscriptions) {
-			String thisEventType = subscription.getEvent().getName();
+			String thisEventType = subscription.getEvent().getSimpleName();
 			Listener thisListener = subscription.getListener();
 			Filter thisFilter = subscription.getFilter();
 			

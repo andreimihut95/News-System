@@ -14,20 +14,25 @@ import com.furiapolitehnicii.Listener.Listener;
 import com.furiapolitehnicii.News.News;
 
 public class Editorial {
+	private String name;
 	private Dispatcher dispatcher;
 	private Queue<Event> events;
 	private Set<News> news;
 	
-	private static final String APPEAR_NEWS = NewsAppearEvent.class.getName();
-	private static final String DELETE_NEWS = NewsDeleteEvent.class.getName();
-	private static final String UPDATE_NEWS = NewsUpdateEvent.class.getName();
+	private static final String APPEAR_NEWS = NewsAppearEvent.class.getSimpleName();
+	private static final String DELETE_NEWS = NewsDeleteEvent.class.getSimpleName();
+	private static final String UPDATE_NEWS = NewsUpdateEvent.class.getSimpleName();
 	
-	public Editorial(Dispatcher dispatcher , Queue<Event> events){
+	public Editorial(String name , Dispatcher dispatcher , Queue<Event> events){
+		this.name = name;
 		this.dispatcher = dispatcher;
 		this.events = events;
 		news = new HashSet<News>();
 	}
-	
+	public String getName()
+	{
+		return name;
+	}
 	public void subscribe(Class<?> eventType, Filter filter, Listener listener)
 	{
 		dispatcher.subscribeListener(eventType, filter, listener);
