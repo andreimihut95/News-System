@@ -3,7 +3,7 @@ package com.furiapolitehnicii.Listener;
 import java.util.Queue;
 
 import com.furiapolitehnicii.Event.Event;
-import com.furiapolitehnicii.Event.NewsAppearEvent;
+import com.furiapolitehnicii.Event.NewsReadEvent;
 import com.furiapolitehnicii.News.News;
 
 public class Reader implements Listener {
@@ -21,7 +21,7 @@ public class Reader implements Listener {
 
 	public void onNewsReadEvent(News news) {
 		news.incrementNumberOfViews();
-		Event newsEvent = new NewsAppearEvent(news);
+		Event newsEvent = new NewsReadEvent(news);
 		events.add(newsEvent);
 	}
 

@@ -11,9 +11,9 @@ public class NewsDispatcher implements Dispatcher {
 	private class Subscription {
 		private Listener listener;
 		private Filter filter;
-		private Class<?> typeEvent;
+		private Class<? extends Event> typeEvent;
 
-		public Subscription(Listener listener, Filter filter, Class<?> typeEvent) {
+		public Subscription(Listener listener, Filter filter, Class<? extends Event> typeEvent) {
 			this.listener = listener;
 			this.filter = filter;
 			this.typeEvent = typeEvent;
@@ -40,12 +40,12 @@ public class NewsDispatcher implements Dispatcher {
 	private final Set<Subscription> subscriptions = new HashSet<Subscription>();
 
 	@Override
-	public void subscribeListener(Class<?> eventType, Filter filter, Listener listener) {
+	public void subscribeListener(Class<? extends Event> eventType, Filter filter, Listener listener) {
 		subscriptions.add(new Subscription(listener, filter, eventType));
 	}
 
 	@Override
-	public void unsubscribeListener(Class<?> eventType, Filter filter, Listener listener) {
+	public void unsubscribeListener(Class<? extends Event> eventType, Filter filter, Listener listener) {
 		subscriptions.remove(new Subscription(listener, filter, eventType));
 	}
 

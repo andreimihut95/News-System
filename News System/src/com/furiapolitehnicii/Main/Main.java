@@ -51,6 +51,8 @@ public class Main {
 		MihaiGadea.onNewsAppearEvent(trumpNews);
 		trumpNews.setInformationSource("Gigi Becali");
 		MirceaBadea.onNewsUpdateEvent(trumpNews);
+		AndreiMihut.onNewsReadEvent(sportNews);
+		CosminMemetea.onNewsReadEvent(sportNews);
 
 		antena1.work();
 	}

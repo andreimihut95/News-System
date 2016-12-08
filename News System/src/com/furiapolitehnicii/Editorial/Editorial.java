@@ -34,11 +34,11 @@ public class Editorial {
 		return name;
 	}
 
-	public void subscribe(Class<?> eventType, Filter filter, Listener listener) {
+	public void subscribe(Class<? extends Event> eventType, Filter filter, Listener listener) {
 		dispatcher.subscribeListener(eventType, filter, listener);
 	}
 
-	public void unsubscribe(Class<?> eventType, Filter filter, Listener listener) {
+	public void unsubscribe(Class<? extends Event> eventType, Filter filter, Listener listener) {
 		dispatcher.subscribeListener(eventType, filter, listener);
 	}
 

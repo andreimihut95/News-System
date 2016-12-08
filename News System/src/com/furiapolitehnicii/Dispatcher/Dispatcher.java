@@ -6,7 +6,7 @@ import com.furiapolitehnicii.Listener.Listener;
 
 public interface Dispatcher {
 	
-	void subscribeListener(Class<?> eventType , Filter filter , Listener listener);
-	void unsubscribeListener(Class<?> eventType, Filter filter , Listener listener);
+	void subscribeListener(Class<? extends Event> eventType , Filter filter , Listener listener);
+	void unsubscribeListener(Class<? extends Event> eventType, Filter filter , Listener listener);
 	void publish(Event event);
 }
