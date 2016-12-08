@@ -61,5 +61,4 @@ public class Editorial {
 			this.news.remove(news);
 		}
 	}
-
 }
