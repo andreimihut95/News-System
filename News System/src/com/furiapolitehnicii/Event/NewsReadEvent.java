@@ -9,6 +9,6 @@ public class NewsReadEvent extends Event {
 
 	@Override
 	public String getIntro() {
-		return "this news has "+ this.getNews().getNumberOfViews()+ " number of readers!";
+		return "this news has " + this.getNews().getNumberOfViews() + " number of readers!";
 	}
 }

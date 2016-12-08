@@ -11,20 +11,18 @@ public class NewsDispatcher implements Dispatcher {
 	private class Subscription {
 		private Listener listener;
 		private Filter filter;
-		private Class<?> typeEvent ;
+		private Class<?> typeEvent;
 
 		public Subscription(Listener listener, Filter filter, Class<?> typeEvent) {
 			this.listener = listener;
 			this.filter = filter;
 			this.typeEvent = typeEvent;
 		}
-		
-		
+
 		@Override
 		public String toString() {
 			return "Subscription [listener=" + listener + ", filter=" + filter + ", typeEvent=" + typeEvent + "]";
 		}
-
 
 		public Listener getListener() {
 			return listener;
@@ -57,9 +55,8 @@ public class NewsDispatcher implements Dispatcher {
 			String thisEventType = subscription.getEvent().getSimpleName();
 			Listener thisListener = subscription.getListener();
 			Filter thisFilter = subscription.getFilter();
-			
-			if(thisEventType.equals(event.getType()) && (thisFilter == null || thisFilter.verify(event)))
-			{
+
+			if (thisEventType.equals(event.getType()) && (thisFilter == null || thisFilter.verify(event))) {
 				thisListener.dispatch(event);
 			}
 		}

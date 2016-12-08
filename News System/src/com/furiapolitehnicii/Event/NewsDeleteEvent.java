@@ -2,7 +2,7 @@ package com.furiapolitehnicii.Event;
 
 import com.furiapolitehnicii.News.News;
 
-public class NewsDeleteEvent extends Event{
+public class NewsDeleteEvent extends Event {
 
 	public NewsDeleteEvent(News news) {
 		super(news);

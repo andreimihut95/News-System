@@ -6,18 +6,18 @@ public abstract class Event {
 
 	private News news;
 	private final String type = this.getClass().getSimpleName();
+
 	abstract public String getIntro();
-	
-	public String getType()
-	{
+
+	public String getType() {
 		return this.type;
 	}
-	public Event(News news)
-	{
+
+	public Event(News news) {
 		this.news = news;
 	}
-	public News getNews()
-	{
+
+	public News getNews() {
 		return this.news;
 	}
 }
