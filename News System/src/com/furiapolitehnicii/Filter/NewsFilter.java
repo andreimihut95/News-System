@@ -49,8 +49,8 @@ public class NewsFilter extends Filter {
 	private boolean isInSubdomains(List<String> subdomains) {
 		if (this.subdomains == null)
 			return true;
-		for (String subdomain : subdomains) {
-			if (!this.subdomains.contains(subdomain))
+		for (String subdomain : this.subdomains) {
+			if (!subdomains.contains(subdomain))
 				return false;
 		}
 		return true;

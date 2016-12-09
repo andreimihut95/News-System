@@ -1,7 +1,9 @@
 package com.furiapolitehnicii.Main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 import com.furiapolitehnicii.Dispatcher.Dispatcher;
@@ -9,6 +11,7 @@ import com.furiapolitehnicii.Dispatcher.NewsDispatcher;
 import com.furiapolitehnicii.Editorial.Editorial;
 import com.furiapolitehnicii.Event.Event;
 import com.furiapolitehnicii.Event.NewsAppearEvent;
+import com.furiapolitehnicii.Event.NewsDeleteEvent;
 import com.furiapolitehnicii.Event.NewsReadEvent;
 import com.furiapolitehnicii.Event.NewsUpdateEvent;
 import com.furiapolitehnicii.Filter.NewsFilter;
@@ -25,6 +28,8 @@ public class Main {
 		Reader AndreiMihut = new Reader("Mihut Andrei", events);
 		Reader CosminMemetea = new Reader("Memetea Cosmin", events);
 		Reader IonPanfilii = new Reader("Panfilii Ion", events);
+		Reader DaianaBalaci = new Reader("Balaci Daiana", events);
+		Reader AndreiMorariu = new Reader("Morariu Andrei", events);
 
 		Editor MihaiGadea = new Editor("Mihai Gadea", events);
 		Editor MirceaBadea = new Editor("Mircea Badea", events);
@@ -35,26 +40,45 @@ public class Main {
 		News sportNews = new News("Lionel Messi and father get 21-month prison term!", "Mircea Badea", "Sports",
 				new ArrayList<String>(), "Vadim Tudor",
 				"Lionel Messi and his father have been fined 3.6m euros and given a 21-month prison sentence for a Barcelona tax fraud case.");
-
+		News computerNews = new News("ASUS and ROG Launch New Gaming Desktops!", "Vadim Tudor", "Computer",
+				Arrays.asList("Keyboard", "Mouse", "Headphones"), "Gigi Becali",
+				"Gaming is in our blood at ASUS. It's long been one of the most entertaining and strenuous things you can do with a PC, and its demands have guided our pursuit of better performance and groundbreaking features since the company's early days.");
 		NewsFilter sportFilter = new NewsFilter();
 		sportFilter.setDomain("Sports");
-
 		NewsFilter politicsFilter = new NewsFilter();
 		politicsFilter.setDomain("Politics");
+		NewsFilter subdomainsFilter = new NewsFilter();
+		List<String> subdomains = Arrays.asList("Keyboard", "Mouse");
+		subdomainsFilter.setSubdomains(subdomains);
 
 		antena1.subscribe(NewsAppearEvent.class, sportFilter, AndreiMihut);
 		antena1.subscribe(NewsAppearEvent.class, politicsFilter, IonPanfilii);
-		antena1.subscribe(NewsUpdateEvent.class, null, CosminMemetea);
-		antena1.subscribe(NewsReadEvent.class, null, MihaiGadea);
+		antena1.subscribe(NewsUpdateEvent.class, CosminMemetea);
+		antena1.subscribe(NewsReadEvent.class, MihaiGadea);
+		antena1.subscribe(NewsReadEvent.class, politicsFilter, MirceaBadea);
+		antena1.subscribe(NewsDeleteEvent.class, CosminMemetea);
+		antena1.subscribe(NewsAppearEvent.class, DaianaBalaci);
+		antena1.subscribe(NewsAppearEvent.class, subdomainsFilter, AndreiMorariu);
 
-		MihaiGadea.onNewsAppearEvent(sportNews);
+		MirceaBadea.onNewsAppearEvent(computerNews);
 		MihaiGadea.onNewsAppearEvent(trumpNews);
+		MirceaBadea.onNewsAppearEvent(sportNews);
+
 		antena1.work();
-		trumpNews.setInformationSource("Gigi Becali");
+
+		trumpNews.setAuthor("Dan Diaconescu");
 		MirceaBadea.onNewsUpdateEvent(trumpNews);
+		MihaiGadea.onNewsDeleteEvent(trumpNews);
+
+		antena1.work();
+
 		AndreiMihut.onNewsReadEvent(sportNews);
 		antena1.work();
+		IonPanfilii.onNewsReadEvent(trumpNews);
+		antena1.work();
 		CosminMemetea.onNewsReadEvent(sportNews);
+		CosminMemetea.onNewsReadEvent(trumpNews);
+		CosminMemetea.onNewsReadEvent(computerNews);
 		antena1.work();
 	}
 

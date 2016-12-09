@@ -20,6 +20,46 @@ public class NewsDispatcher implements Dispatcher {
 		}
 
 		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + getOuterType().hashCode();
+			result = prime * result + ((filter == null) ? 0 : filter.hashCode());
+			result = prime * result + ((listener == null) ? 0 : listener.hashCode());
+			result = prime * result + ((typeEvent == null) ? 0 : typeEvent.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Subscription other = (Subscription) obj;
+			if (!getOuterType().equals(other.getOuterType()))
+				return false;
+			if (filter == null) {
+				if (other.filter != null)
+					return false;
+			} else if (!filter.equals(other.filter))
+				return false;
+			if (listener == null) {
+				if (other.listener != null)
+					return false;
+			} else if (!listener.equals(other.listener))
+				return false;
+			if (typeEvent == null) {
+				if (other.typeEvent != null)
+					return false;
+			} else if (!typeEvent.equals(other.typeEvent))
+				return false;
+			return true;
+		}
+
+		@Override
 		public String toString() {
 			return "Subscription [listener=" + listener + ", filter=" + filter + ", typeEvent=" + typeEvent + "]";
 		}
@@ -34,6 +74,10 @@ public class NewsDispatcher implements Dispatcher {
 
 		public Class<?> getEvent() {
 			return typeEvent;
+		}
+
+		private NewsDispatcher getOuterType() {
+			return NewsDispatcher.this;
 		}
 	}
 
