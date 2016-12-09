@@ -37,9 +37,6 @@ public class Editorial {
 	public void unsubscribe(Class<? extends Event> eventType, Filter filter, Listener listener) {
 		dispatcher.unsubscribeListener(eventType, filter, listener);
 	}
-	public void unsubscribe(Class<? extends Event> eventType, Listener listener) {
-		dispatcher.unsubscribeListener(eventType, null, listener);
-	}
 	
 
 	public void work() {

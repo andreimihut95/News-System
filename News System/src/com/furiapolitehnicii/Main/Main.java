@@ -60,26 +60,35 @@ public class Main {
 		antena1.subscribe(NewsAppearEvent.class, DaianaBalaci);
 		antena1.subscribe(NewsAppearEvent.class, subdomainsFilter, AndreiMorariu);
 
-		MirceaBadea.onNewsAppearEvent(computerNews);
-		MihaiGadea.onNewsAppearEvent(trumpNews);
-		MirceaBadea.onNewsAppearEvent(sportNews);
+		 MirceaBadea.onNewsAppearEvent(computerNews);
+		 MihaiGadea.onNewsAppearEvent(trumpNews);
+		 MirceaBadea.onNewsAppearEvent(sportNews);
+		
+		 antena1.work();
+		
+		 trumpNews.setAuthor("Dan Diaconescu");
+		 MirceaBadea.onNewsUpdateEvent(trumpNews);
+		 MihaiGadea.onNewsDeleteEvent(trumpNews);
+		
+		 antena1.work();
+		
+		 AndreiMihut.onNewsReadEvent(sportNews);
+		 antena1.work();
+		 IonPanfilii.onNewsReadEvent(trumpNews);
+		 antena1.work();
+		 CosminMemetea.onNewsReadEvent(sportNews);
+		 CosminMemetea.onNewsReadEvent(trumpNews);
+		 CosminMemetea.onNewsReadEvent(computerNews);
+		 antena1.work();
 
+		antena1.unsubscribe(NewsAppearEvent.class, sportFilter, AndreiMihut);
+		MihaiGadea.onNewsAppearEvent(sportNews);
 		antena1.work();
+		
+		MirceaBadea.onNewsAppearEvent(trumpNews);
+		antena1.work();
+		
 
-		trumpNews.setAuthor("Dan Diaconescu");
-		MirceaBadea.onNewsUpdateEvent(trumpNews);
-		MihaiGadea.onNewsDeleteEvent(trumpNews);
-
-		antena1.work();
-
-		AndreiMihut.onNewsReadEvent(sportNews);
-		antena1.work();
-		IonPanfilii.onNewsReadEvent(trumpNews);
-		antena1.work();
-		CosminMemetea.onNewsReadEvent(sportNews);
-		CosminMemetea.onNewsReadEvent(trumpNews);
-		CosminMemetea.onNewsReadEvent(computerNews);
-		antena1.work();
 	}
 
 }
