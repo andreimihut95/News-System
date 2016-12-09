@@ -1,7 +1,6 @@
 package com.furiapolitehnicii.Filter;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.furiapolitehnicii.Event.Event;
@@ -12,8 +11,8 @@ public class NewsFilter extends Filter {
 	private String domain;
 	private List<String> subdomains = new ArrayList<String>();
 	private String informationSource;
-	private Date firstPublication;
-	private Date lastModification;
+	private String firstPublication;
+	private String lastModification;
 
 	public void setAuthor(String author) {
 		this.author = author;
@@ -31,15 +30,15 @@ public class NewsFilter extends Filter {
 		this.informationSource = informationSource;
 	}
 
-	public void setFirstPublication(Date firstPublication) {
+	public void setFirstPublication(String firstPublication) {
 		this.firstPublication = firstPublication;
 	}
 
-	public void setLastModification(Date lastModification) {
+	public void setLastModification(String lastModification) {
 		this.lastModification = lastModification;
 	}
 
-	private static boolean hasSameType(Object type1, Object type2) {
+	private static boolean hasSameType(String type1, String type2) {
 		if (type1 == null)
 			return true;
 		else if (type1.toString().equals(type2.toString()))
@@ -62,8 +61,8 @@ public class NewsFilter extends Filter {
 		String author = event.getNews().getAuthor();
 		String domain = event.getNews().getDomain();
 		String informationSource = event.getNews().getInformationSource();
-		Date firstPublication = event.getNews().getFirstPublication();
-		Date lastModification = event.getNews().getLastModification();
+		String firstPublication = event.getNews().getFirstPublication();
+		String lastModification = event.getNews().getLastModification();
 		List<String> subdomains = event.getNews().getSubdomains();
 
 		return hasSameType(this.author, author) && hasSameType(this.domain, domain)

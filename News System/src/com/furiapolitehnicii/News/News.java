@@ -1,5 +1,6 @@
 package com.furiapolitehnicii.News;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +12,8 @@ public class News {
 	private String content;
 	private List<String> subdomains;
 	private String informationSource;
-	private Date firstPublication;
-	private Date lastModification;
+	private String firstPublication;
+	private String lastModification;
 	private int numberOfViews;
 	private boolean deleted;
 
@@ -23,13 +24,19 @@ public class News {
 		this.domain = domain;
 		this.subdomains = subdomains;
 		this.informationSource = informationSource;
-		this.firstPublication = new Date();
-		this.lastModification = new Date();
+		this.firstPublication = getCurrentDate();
+		this.lastModification = getCurrentDate();
 		this.content = content;
 		this.deleted = false;
 		this.numberOfViews = 0;
 	}
-
+	private static String getCurrentDate()
+	{
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date now = new Date();
+		String today = simpleDateFormat.format(now);
+		return today;
+	}
 	public String toString() {
 		StringBuffer toString = new StringBuffer();
 		toString.append("Title: " + title);
@@ -73,7 +80,7 @@ public class News {
 
 	public void setTitle(String title) {
 		this.title = title;
-		lastModification = new Date();
+		lastModification = getCurrentDate();
 	}
 
 	public String getAuthor() {
@@ -82,7 +89,7 @@ public class News {
 
 	public void setAuthor(String author) {
 		this.author = author;
-		lastModification = new Date();
+		lastModification = getCurrentDate();
 	}
 
 	public String getDomain() {
@@ -91,7 +98,7 @@ public class News {
 
 	public void setDomain(String domain) {
 		this.domain = domain;
-		lastModification = new Date();
+		lastModification = getCurrentDate();
 	}
 
 	public List<String> getSubdomains() {
@@ -100,7 +107,7 @@ public class News {
 
 	public void setSubdomains(List<String> subdomains) {
 		this.subdomains = subdomains;
-		lastModification = new Date();
+		lastModification = getCurrentDate();
 	}
 
 	public String getInformationSource() {
@@ -109,14 +116,14 @@ public class News {
 
 	public void setInformationSource(String informationSource) {
 		this.informationSource = informationSource;
-		lastModification = new Date();
+		lastModification = getCurrentDate();
 	}
 
-	public Date getFirstPublication() {
+	public String getFirstPublication() {
 		return firstPublication;
 	}
 
-	public Date getLastModification() {
+	public String getLastModification() {
 		return lastModification;
 	}
 
@@ -126,7 +133,6 @@ public class News {
 
 	public void setContent(String content) {
 		this.content = content;
-		lastModification = new Date();
+		lastModification = getCurrentDate();
 	}
-
 }

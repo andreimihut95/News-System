@@ -49,9 +49,11 @@ public class Main {
 
 		MihaiGadea.onNewsAppearEvent(sportNews);
 		MihaiGadea.onNewsAppearEvent(trumpNews);
+		antena1.work();
 		trumpNews.setInformationSource("Gigi Becali");
 		MirceaBadea.onNewsUpdateEvent(trumpNews);
 		AndreiMihut.onNewsReadEvent(sportNews);
+		antena1.work();
 		CosminMemetea.onNewsReadEvent(sportNews);
 
 		antena1.work();

@@ -23,7 +23,7 @@ public class Editor implements Listener {
 
 	@Override
 	public void dispatch(Event event) {
-		System.out.println("Hei " + name + ", " + event.getIntro() + System.lineSeparator() + event.getNews());
+		System.out.println("Hei " + name + ", " + event.getIntro() + System.lineSeparator() + event.getNews().getTitle());
 	}
 
 	public void onNewsAppearEvent(News news) {
