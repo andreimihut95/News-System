@@ -10,7 +10,7 @@ import com.furiapolitehnicii.News.News;
 
 public class Editor implements Listener {
 	private String name;
-	Queue<Event> events;
+	private Queue<Event> events;
 
 	public Editor(String name, Queue<Event> events) {
 		this.name = name;
@@ -23,16 +23,17 @@ public class Editor implements Listener {
 
 	@Override
 	public void dispatch(Event event) {
-		System.out.println("Hei " + name + ", " + event.getIntro() + System.lineSeparator() + event.getNews().getTitle());
+		System.out
+				.println("Hei " + name + ", " + event.getIntro() + System.lineSeparator() + event.getNews().getTitle());
 	}
 
 	public void onNewsAppearEvent(News news) {
 		Event newsAppearEvent = new NewsAppearEvent(news);
 		events.add(newsAppearEvent);
-
 	}
 
 	public void onNewsDeleteEvent(News news) {
+		news.delete();
 		Event newsAppearEvent = new NewsDeleteEvent(news);
 		events.add(newsAppearEvent);
 

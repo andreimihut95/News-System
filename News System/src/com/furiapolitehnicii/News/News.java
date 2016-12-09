@@ -15,7 +15,7 @@ public class News {
 	private String firstPublication;
 	private String lastModification;
 	private int numberOfViews;
-	private boolean deleted;
+	private boolean isDeleted;
 
 	public News(String title, String author, String domain, List<String> subdomains, String informationSource,
 			String content) {
@@ -27,7 +27,7 @@ public class News {
 		this.firstPublication = getCurrentDate();
 		this.lastModification = getCurrentDate();
 		this.content = content;
-		this.deleted = false;
+		this.isDeleted = false;
 		this.numberOfViews = 0;
 	}
 	private static String getCurrentDate()
@@ -59,11 +59,11 @@ public class News {
 	}
 
 	public boolean isDeleted() {
-		return this.deleted;
+		return this.isDeleted;
 	}
 
 	public void delete() {
-		this.deleted = true;
+		this.isDeleted = true;
 	}
 
 	public void incrementNumberOfViews() {

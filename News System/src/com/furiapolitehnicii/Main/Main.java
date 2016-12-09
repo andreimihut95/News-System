@@ -55,7 +55,6 @@ public class Main {
 		AndreiMihut.onNewsReadEvent(sportNews);
 		antena1.work();
 		CosminMemetea.onNewsReadEvent(sportNews);
-
 		antena1.work();
 	}
 
