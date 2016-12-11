@@ -8,5 +8,5 @@ public interface Dispatcher {
 	
 	void subscribeListener(Class<? extends Event> eventType , Filter filter , Listener listener);
 	void unsubscribeListener(Class<? extends Event> eventType, Filter filter , Listener listener);
-	void publish(Event event);
+	void dispatch(Event event);
 }

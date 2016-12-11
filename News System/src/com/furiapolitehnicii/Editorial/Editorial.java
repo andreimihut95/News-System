@@ -42,7 +42,7 @@ public class Editorial {
 	public void work() {
 		while (!events.isEmpty()) {
 			Event event = events.remove();
-			dispatcher.publish(event);
+			dispatcher.dispatch(event);
 		}
 	}
 }

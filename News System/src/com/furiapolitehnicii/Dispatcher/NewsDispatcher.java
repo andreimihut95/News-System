@@ -94,7 +94,7 @@ public class NewsDispatcher implements Dispatcher {
 	}
 
 	@Override
-	public void publish(Event event) {
+	public void dispatch(Event event) {
 		for (Subscription subscription : subscriptions) {
 			String thisEventType = subscription.getEvent().getSimpleName();
 			Listener thisListener = subscription.getListener();

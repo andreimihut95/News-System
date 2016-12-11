@@ -3,7 +3,9 @@ package com.furiapolitehnicii.Listener;
 import java.util.Queue;
 
 import com.furiapolitehnicii.Event.Event;
+import com.furiapolitehnicii.Event.NewsAppearEvent;
 import com.furiapolitehnicii.Event.NewsReadEvent;
+import com.furiapolitehnicii.Event.NewsUpdateEvent;
 import com.furiapolitehnicii.News.News;
 
 public class Reader implements Listener {
@@ -28,6 +30,15 @@ public class Reader implements Listener {
 	@Override
 	public void dispatch(Event event) {
 		System.out.println("Hello " + name + ", " + event.getIntro() + System.lineSeparator() + event.getNews());
+		if (isReadEvent(event))
+			onNewsReadEvent(event.getNews());
 	}
 
+	private static boolean isReadEvent(Event event) {
+		String eventType = event.getType();
+		if (eventType.equals(NewsAppearEvent.class.getSimpleName())
+				|| eventType.equals(NewsUpdateEvent.class.getSimpleName()))
+			return true;
+		return false;
+	}
 }
