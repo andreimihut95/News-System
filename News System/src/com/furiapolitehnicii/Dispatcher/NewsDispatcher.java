@@ -1,9 +1,11 @@
 package com.furiapolitehnicii.Dispatcher;
 
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
 import com.furiapolitehnicii.Event.Event;
 import com.furiapolitehnicii.Filter.Filter;
 import com.furiapolitehnicii.Listener.Listener;
-import com.furiapolitehnicii.Resource.ConcurentSet;
 
 public class NewsDispatcher implements Dispatcher {
 	private class Subscription {
@@ -84,7 +86,7 @@ public class NewsDispatcher implements Dispatcher {
 		}
 	}
 
-	private final ConcurentSet<Subscription> subscriptions = new ConcurentSet<Subscription>();
+	private final BlockingQueue<Subscription> subscriptions = new LinkedBlockingQueue<Subscription>();
 
 	@Override
 	public void subscribeListener(Class<? extends Event> eventType,

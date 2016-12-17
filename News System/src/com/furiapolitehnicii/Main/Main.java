@@ -117,7 +117,9 @@ public class Main {
 				this.onNewsUpdateEvent(computerNews);
 			}
 		};
-		new Thread(MirceaBadea).start();
-		new Thread(MihaiGadea).start();
+		Thread MirceaBadeaThread = new Thread(MirceaBadea);
+		MirceaBadeaThread.start();
+		Thread MihaiGadeaThread = new Thread(MihaiGadea);
+		MihaiGadeaThread.start();
 	}
 }
