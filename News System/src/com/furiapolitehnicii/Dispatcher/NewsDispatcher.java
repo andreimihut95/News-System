@@ -1,11 +1,9 @@
 package com.furiapolitehnicii.Dispatcher;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.furiapolitehnicii.Event.Event;
 import com.furiapolitehnicii.Filter.Filter;
 import com.furiapolitehnicii.Listener.Listener;
+import com.furiapolitehnicii.Resource.ConcurentSet;
 
 public class NewsDispatcher implements Dispatcher {
 	private class Subscription {
@@ -13,7 +11,8 @@ public class NewsDispatcher implements Dispatcher {
 		private Filter filter;
 		private Class<? extends Event> typeEvent;
 
-		public Subscription(Listener listener, Filter filter, Class<? extends Event> typeEvent) {
+		public Subscription(Listener listener, Filter filter,
+				Class<? extends Event> typeEvent) {
 			this.listener = listener;
 			this.filter = filter;
 			this.typeEvent = typeEvent;
@@ -24,9 +23,12 @@ public class NewsDispatcher implements Dispatcher {
 			final int prime = 31;
 			int result = 1;
 			result = prime * result + getOuterType().hashCode();
-			result = prime * result + ((filter == null) ? 0 : filter.hashCode());
-			result = prime * result + ((listener == null) ? 0 : listener.hashCode());
-			result = prime * result + ((typeEvent == null) ? 0 : typeEvent.hashCode());
+			result = prime * result
+					+ ((filter == null) ? 0 : filter.hashCode());
+			result = prime * result
+					+ ((listener == null) ? 0 : listener.hashCode());
+			result = prime * result
+					+ ((typeEvent == null) ? 0 : typeEvent.hashCode());
 			return result;
 		}
 
@@ -61,7 +63,8 @@ public class NewsDispatcher implements Dispatcher {
 
 		@Override
 		public String toString() {
-			return "Subscription [listener=" + listener + ", filter=" + filter + ", typeEvent=" + typeEvent + "]";
+			return "Subscription [listener=" + listener + ", filter=" + filter
+					+ ", typeEvent=" + typeEvent + "]";
 		}
 
 		public Listener getListener() {
@@ -81,15 +84,17 @@ public class NewsDispatcher implements Dispatcher {
 		}
 	}
 
-	private final Set<Subscription> subscriptions = new HashSet<Subscription>();
+	private final ConcurentSet<Subscription> subscriptions = new ConcurentSet<Subscription>();
 
 	@Override
-	public void subscribeListener(Class<? extends Event> eventType, Filter filter, Listener listener) {
+	public void subscribeListener(Class<? extends Event> eventType,
+			Filter filter, Listener listener) {
 		subscriptions.add(new Subscription(listener, filter, eventType));
 	}
 
 	@Override
-	public void unsubscribeListener(Class<? extends Event> eventType, Filter filter, Listener listener) {
+	public void unsubscribeListener(Class<? extends Event> eventType,
+			Filter filter, Listener listener) {
 		subscriptions.remove(new Subscription(listener, filter, eventType));
 	}
 
@@ -100,7 +105,8 @@ public class NewsDispatcher implements Dispatcher {
 			Listener thisListener = subscription.getListener();
 			Filter thisFilter = subscription.getFilter();
 
-			if (thisEventType.equals(event.getType()) && (thisFilter == null || thisFilter.verify(event))) {
+			if (thisEventType.equals(event.getType())
+					&& (thisFilter == null || thisFilter.verify(event))) {
 				thisListener.dispatch(event);
 			}
 		}

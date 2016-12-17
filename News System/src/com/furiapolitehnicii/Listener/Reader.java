@@ -1,18 +1,17 @@
 package com.furiapolitehnicii.Listener;
 
-import java.util.Queue;
-
 import com.furiapolitehnicii.Event.Event;
 import com.furiapolitehnicii.Event.NewsAppearEvent;
 import com.furiapolitehnicii.Event.NewsReadEvent;
 import com.furiapolitehnicii.Event.NewsUpdateEvent;
 import com.furiapolitehnicii.News.News;
+import com.furiapolitehnicii.Resource.ConcurentQueue;
 
-public class Reader implements Listener {
+public abstract class Reader implements Listener, Runnable {
 	private String name;
-	private Queue<Event> events;
+	private ConcurentQueue<Event> events;
 
-	public Reader(String name, Queue<Event> events) {
+	public Reader(String name, ConcurentQueue<Event> events) {
 		this.name = name;
 		this.events = events;
 	}
@@ -29,7 +28,8 @@ public class Reader implements Listener {
 
 	@Override
 	public void dispatch(Event event) {
-		System.out.println("Hello " + name + ", " + event.getIntro() + System.lineSeparator() + event.getNews());
+		System.out.println("Hello " + name + ", " + event.getIntro()
+				+ System.lineSeparator() + event.getNews());
 		if (isReadEvent(event))
 			onNewsReadEvent(event.getNews());
 	}
